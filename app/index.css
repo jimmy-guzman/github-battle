@@ -51,6 +51,7 @@ li {
 
 .space-list-items {
   margin-bottom: 7px;
+  text-align: center;
 }
 
 .languages {
@@ -106,7 +107,7 @@ li {
 .column {
   display: flex;
   flex-direction: column;
-  width: 500px;
+  /* width: 500px; */
   align-items: center;
 }
 

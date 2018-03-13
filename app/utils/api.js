@@ -1,7 +1,7 @@
 var axios = require("axios");
 
-var id = "YOUR_CLIENT_ID";
-var sec = "YOUR_SECRET_ID";
+var id = "09d6dcdb21cbe2be0fb1";
+var sec = "65d349fd08b0c4dd2a1bb531dba61a7e7458803f";
 var params = "?client_id=" + id + "&client_secret=" + sec;
 
 function getProfile(username) {
@@ -65,7 +65,7 @@ module.exports = {
       .then(sortPlayers)
       .catch(handleError);
   },
-  fetchPopularReops: function(language) {
+  fetchPopularRepos: function(language) {
     var encodedURI = window.encodeURI(
       "https://api.github.com/search/repositories?q=stars:>1+language:" +
         language +
