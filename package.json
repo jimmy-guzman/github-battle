@@ -10,12 +10,16 @@
     "deploy": "npm run build && firebase deploy"
   },
   "babel": {
-    "presets": ["env", "react"]
+    "presets": [
+      "env",
+      "react"
+    ]
   },
   "author": "Jimmy Guzman",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0",
+    "babel-polyfill": "^6.26.0",
     "prop-types": "^15.6.1",
     "query-string": "^5.1.0",
     "react": "^16.3.0-alpha.1",
