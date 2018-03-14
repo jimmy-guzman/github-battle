@@ -1,25 +1,24 @@
-import axios from "axios";
-
 const id = "09d6dcdb21cbe2be0fb1";
 const sec = "65d349fd08b0c4dd2a1bb531dba61a7e7458803f";
 const params = `?client_id=${id}&client_secret=${sec}`;
 
 async function getProfile(username) {
-  const profile = await axios.get(
+  const response = await fetch(
     `https://api.github.com/users/${username}${params}`
   );
 
-  return profile.data;
+  return response.json();
 }
 
-function getRepos(username) {
-  return axios.get(
+async function getRepos(username) {
+  const response = await fetch(
     `https://api.github.com/users/${username}/repos${params}&per_page=100`
   );
+  return response.json();
 }
 
 function getStarCount(repos) {
-  return repos.data.reduce(
+  return repos.reduce(
     (count, { stargazers_count }) => count + stargazers_count,
     0
   );
@@ -62,6 +61,7 @@ export async function fetchPopularRepos(language) {
     `https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=stars&order=desc&type=Repositories`
   );
 
-  const repos = await axios.get(encodedURI).catch(handleError);
-  return repos.data.items;
+  const response = await fetch(encodedURI).catch(handleError);
+  const repos = await response.json();
+  return repos.items;
 }
