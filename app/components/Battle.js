@@ -1,12 +1,11 @@
-const React = require("react");
-const PropTypes = require("prop-types");
-const Link = require("react-router-dom").Link;
-const PlayerPreview = require("./PlayerPreview");
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import PlayerPreview from "./PlayerPreview";
 
 class PlayerInput extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       username: ""
     };
@@ -14,18 +13,16 @@ class PlayerInput extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
   handleChange(event) {
     const value = event.target.value;
 
     this.setState(() => ({ username: value }));
   }
-
   handleSubmit(event) {
     event.preventDefault();
+
     this.props.onSubmit(this.props.id, this.state.username);
   }
-
   render() {
     const { username } = this.state;
     const { label } = this.props;
@@ -39,8 +36,8 @@ class PlayerInput extends React.Component {
           id="username"
           placeholder="github username"
           type="text"
-          autoComplete="off"
           value={username}
+          autoComplete="off"
           onChange={this.handleChange}
         />
         <button className="button" type="submit" disabled={!username}>
@@ -57,6 +54,10 @@ PlayerInput.propTypes = {
   onSubmit: PropTypes.func.isRequired
 };
 
+PlayerInput.defaultProps = {
+  label: "Username"
+};
+
 class Battle extends React.Component {
   constructor(props) {
     super(props);
@@ -68,7 +69,6 @@ class Battle extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleReset = this.handleReset.bind(this);
   }
   handleSubmit(id, username) {
     this.setState(() => ({
@@ -82,7 +82,6 @@ class Battle extends React.Component {
       [id + "Image"]: null
     }));
   }
-
   render() {
     const { match } = this.props;
     const {
@@ -133,12 +132,13 @@ class Battle extends React.Component {
             </PlayerPreview>
           )}
         </div>
+
         {playerOneImage &&
           playerTwoImage && (
             <Link
               className="button"
               to={{
-                pathname: `${match.url}/results`,
+                pathname: match.url + "/results",
                 search: `?playerOneName=${playerOneName}&playerTwoName=${playerTwoName}`
               }}
             >
@@ -150,4 +150,4 @@ class Battle extends React.Component {
   }
 }
 
-module.exports = Battle;
+export default Battle;
